@@ -1,0 +1,58 @@
+#!fsharp
+
+#r "nuget:PolyglotExtension"
+
+#!javascript
+
+var from = turf.point([-75.343, 39.984]);
+var to = turf.point([-75.534, 39.123]);
+var options = {units: 'kilometers'};
+var distance = turf.distance(from, to, options);
+console.log(distance);
+
+#!javascript
+
+console.log(python("1 + 3"))
+
+#!javascript
+
+#!loadPackage --name numpy
+
+#!javascript
+
+console.log(python(`
+import numpy as np
+
+table = np.array([
+     [5, 3, 7, 1],
+     [2, 6, 13 ,9],
+     [1, 1, 1, 1],
+     [4, 3, 2, 0],
+])
+'{0}'.format(table.max())
+`));
+
+#!javascript
+
+console.log(python(`import cmath
+
+a = 1
+b = 5
+c = 6
+
+# calculate the discriminant
+d = (b**2) - (4*a*c)
+
+# find two solutions
+sol1 = (-b-cmath.sqrt(d))/(2*a)
+sol2 = (-b+cmath.sqrt(d))/(2*a)
+
+'{0}'.format(sol1.real)`));
+
+#!fsharp
+
+#!fable.python
+
+let act x = x*x
+
+18 |> act |> (*) 3

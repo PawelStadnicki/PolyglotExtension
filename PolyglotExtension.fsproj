@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <VersionSuffix>0.0.$([System.DateTime]::UtcNow.DayOfYear.ToString("000")).$([System.DateTime]::UtcNow.ToString(HHmmss))</VersionSuffix>
+    <AssemblyVersion Condition=" '$(VersionSuffix)' == '' ">0.0.0.1</AssemblyVersion>
+    <AssemblyVersion Condition=" '$(VersionSuffix)' != '' ">$(VersionSuffix)</AssemblyVersion>
+    <Version Condition=" '$(VersionSuffix)' == '' ">0.0.1.0</Version>
+    <Version Condition=" '$(VersionSuffix)' != '' ">$(VersionSuffix)</Version>
+    <PackageVersion Condition=" '$(VersionSuffix)' == '' ">0.0.0.1</PackageVersion>
+    <PackageVersion Condition=" '$(VersionSuffix)' != '' ">$(VersionSuffix)</PackageVersion>
+    <BaseOutputPath>D:\src\interactivenuget</BaseOutputPath>
+
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="PolyglotFacade.fs" />
+    <Compile Include="Commands\FablePython.fs" />
+    <Compile Include="Commands\LoadPackage.fs" />
+    <Compile Include="StaticCode.fs" />
+    <Compile Include="Extension.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CliWrap" Version="3.4.4" />
+    <PackageReference Include="Microsoft.DotNet.Interactive" Version="1.0.0-beta.22175.2" />
+    <PackageReference Include="Microsoft.DotNet.Interactive.CSharp" Version="1.0.0-beta.22175.2" />
+    <PackageReference Include="Microsoft.DotNet.Interactive.Formatting" Version="1.0.0-beta.22175.2" />
+    <PackageReference Include="Microsoft.DotNet.Interactive.FSharp" Version="1.0.0-beta.22175.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="$(OutputPath)/PolyglotExtension.dll" Pack="true" PackagePath="interactive-extensions/dotnet" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" Version="6.0.3" />
+  </ItemGroup>
+</Project>
